@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\student\Documents\GitHub\codieshare\app\app.iml" filepath="C:\Users\student\Documents\GitHub\codieshare\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/codieshare.iml" filepath="$PROJECT_DIR$/codieshare.iml" />
+      <module fileurl="file://C:\Users\student\Documents\GitHub\codieshare\codieshare.iml" filepath="C:\Users\student\Documents\GitHub\codieshare\codieshare.iml" />
     </modules>
   </component>
 </project>
