@@ -1,11 +1,14 @@
 package com.example.student.codieshare;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.soundcloud.android.crop.Crop;
 
 /**
  * Created by student on 2018-01-10.
@@ -16,9 +19,12 @@ public class Gallery_Child extends Fragment{
         return new Gallery_Child();
     }
 
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crop.pickImage((Activity) getContext());
     }
 
     @Nullable
