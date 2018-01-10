@@ -21,11 +21,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Begin the transaction
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.viewpager, new Gallery_Parent());
-        ft.commit();
-
         tabs[0] = findViewById(R.id.btn_camera);
         tabs[1] = findViewById(R.id.btn_gallery);
         tabs[2] = findViewById(R.id.btn_board);
@@ -49,7 +44,7 @@ public class MainActivity extends AppCompatActivity{
             });
         }
         frags[0] = new Picture();
-        frags[1] = new Gallery_Parent();
+        frags[1] = new Gallery();
         frags[2] = new Board();
         frags[3] = new Settings();
 
