@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity{
         tabs[1] = findViewById(R.id.btn_gallery);
         tabs[2] = findViewById(R.id.btn_board);
         tabs[3] = findViewById(R.id.btn_settings);
-
         viewPager = findViewById(R.id.viewpager);
 
         for (int i = 0; i < tabs.length; i++) {
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity{
                     tabs[1].setBackgroundColor(0x55888800);
                     tabs[2].setBackgroundColor(0x55886600);
                     tabs[3].setBackgroundColor(0x55884400);
-
                     v.setBackgroundColor(0xffffff);
                 }
             });
@@ -61,31 +59,24 @@ public class MainActivity extends AppCompatActivity{
                 tabs[1].setBackgroundColor(0x55888800);
                 tabs[2].setBackgroundColor(0x55886600);
                 tabs[3].setBackgroundColor(0x55884400);
-
                 tabs[position].setBackgroundColor(0xffffff);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
-
     }
 
     class MyPagerAdapter extends FragmentStatePagerAdapter {
-
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
         @Override
         public Fragment getItem(int position) {
             // listview 어댑터 작성할 때 getView 메소드와 비슷
             return frags[position];
         }
-
-
         @Override
         public int getCount() {
             return frags.length;
