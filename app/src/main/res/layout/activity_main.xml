@@ -45,6 +45,8 @@
             android:text="Settings" />
 
 
+
+
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

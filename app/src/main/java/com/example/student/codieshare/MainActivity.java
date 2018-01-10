@@ -4,13 +4,14 @@ package com.example.student.codieshare;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private Button[] tabs = new Button[4];
     private ViewPager viewPager;
     private Fragment[] frags = new Fragment[4];
@@ -19,6 +20,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Begin the transaction
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.viewpager, new Gallery_Parent());
+        ft.commit();
 
         tabs[0] = findViewById(R.id.btn_camera);
         tabs[1] = findViewById(R.id.btn_gallery);
@@ -43,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         frags[0] = new Picture();
-        frags[1] = new Gallery();
+        frags[1] = new Gallery_Parent();
         frags[2] = new Board();
         frags[3] = new Settings();
 
