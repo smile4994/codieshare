@@ -21,6 +21,15 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ////////////////////////////
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.viewpager, Gallery.newInstance());
+        ft.commit();
+
+        /////////////////////////////
+
+
         tabs[0] = findViewById(R.id.btn_camera);
         tabs[1] = findViewById(R.id.btn_gallery);
         tabs[2] = findViewById(R.id.btn_board);

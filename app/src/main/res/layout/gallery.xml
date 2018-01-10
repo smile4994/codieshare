@@ -1,11 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <LinearLayout
+    android:id="@+id/group_btns_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btn_outer"
+        android:layout_width="0sp"
+        android:layout_height="50sp"
+        android:layout_weight="1"
+        android:background="#5500ff00"
+        android:text="OUTER"
+        android:textSize="10sp"/>
+
+    <Button
+        android:id="@+id/btn_top"
+        android:layout_width="0sp"
+        android:layout_height="50sp"
+        android:layout_weight="1"
+        android:background="#99115599"
+        android:text="TOP"
+        android:textSize="10sp"/>
+
+    <Button
+        android:id="@+id/btn_bottom"
+        android:layout_width="0sp"
+        android:layout_height="50sp"
+        android:layout_weight="1"
+        android:background="#ffff2211"
+        android:text="BOTTOM"
+        android:textSize="10sp"/>
+
+    <Button
+        android:id="@+id/btn_shoes"
+        android:layout_width="0sp"
+        android:layout_height="50sp"
+        android:layout_weight="1"
+        android:background="#ff11ff22"
+        android:text="SHOES"
+        android:textSize="10sp"/>
+
+        <Button
+            android:id="@+id/btn_acc"
+            android:layout_width="0sp"
+            android:layout_height="50sp"
+            android:layout_weight="1"
+            android:background="#ffffff22"
+            android:text="ACCESSORY"
+            android:textSize="10sp"/>
+
+
+
+
+</LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_child"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="갤러리"/>
+        android:layout_height="0sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_btns_parent"
+        tools:ignore="UnknownId"></android.support.v4.view.ViewPager>
 
 </android.support.constraint.ConstraintLayout>
