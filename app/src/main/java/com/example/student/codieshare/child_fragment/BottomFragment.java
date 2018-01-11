@@ -1,5 +1,4 @@
-package com.example.student.codieshare;
-
+package com.example.student.codieshare.child_fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,13 +8,17 @@ import android.support.v4.app.Fragment;
 import com.soundcloud.android.crop.Crop;
 
 /**
- * Created by student on 2018-01-09.
+ * Created by student on 2018-01-10.
  */
 
-public class Board extends Fragment {
+public class BottomFragment extends Fragment{
+    public static BottomFragment newInstance(){
+        return new BottomFragment();
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Crop.pickImage((Activity) getContext());
+        Crop.pickImage((Activity) this.getContext());
     }
 }

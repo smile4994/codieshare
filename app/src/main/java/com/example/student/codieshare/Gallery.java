@@ -12,6 +12,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.student.codieshare.child_fragment.AccFragment;
+import com.example.student.codieshare.child_fragment.BottomFragment;
+import com.example.student.codieshare.child_fragment.ShoesFragment;
+import com.example.student.codieshare.child_fragment.TopFragment;
+
 /**
  * Created by student on 2018-01-09.
  */
@@ -48,27 +53,27 @@ public class Gallery extends Fragment implements OnClickListener {
         Fragment fg;
         switch (v.getId()) {
             case R.id.btn_outer:
-                fg = Gallery_Child.newInstance();
+                fg = TopFragment.newInstance();
                 setChildFragment(fg);
                 break;
 
             case R.id.btn_top:
-                fg = Gallery_Child.newInstance();
+                fg = TopFragment.newInstance();
                 setChildFragment(fg);
                 break;
 
             case R.id.btn_bottom:
-                fg = Gallery_Child.newInstance();
+                fg = BottomFragment.newInstance();
                 setChildFragment(fg);
                 break;
 
             case R.id.btn_shoes:
-                fg = Gallery_Child.newInstance();
+                fg = ShoesFragment.newInstance();
                 setChildFragment(fg);
                 break;
 
             case R.id.btn_acc:
-                fg = Gallery_Child.newInstance();
+                fg = AccFragment.newInstance();
                 setChildFragment(fg);
                 break;
 
