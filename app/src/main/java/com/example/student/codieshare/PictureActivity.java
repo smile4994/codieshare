@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 /**
  * Created by student on 2018-01-10.
@@ -114,8 +115,10 @@ public class PictureActivity extends Activity {
         saveName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Random r = new Random();
+                String randum = r.nextInt(100)+"";
                 savePictureName = "";
-                savePictureName = name.getText() + "";
+                savePictureName = name.getText()+"_"+randum;
                 custom.cancel();
                 makeDialogSave().show();
             }
