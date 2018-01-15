@@ -1,6 +1,7 @@
 package com.example.student.codieshare;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,7 +29,7 @@ public class Gallery extends Fragment{
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.gallery, container, false);
 
         btn_outer = view.findViewById(R.id.btn_outer);
@@ -40,7 +41,16 @@ public class Gallery extends Fragment{
         btn_outer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Crop.pickImage(getContext(), Gallery.this);
+                //사진가져오기
+//                Intent intent = new Intent(Intent.ACTION_PICK);
+//                intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+//                intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(intent, GET_PICTURE_URI);
+
+//                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//                intent.setType("image/*");
+//                startActivity(intent);
+
             }
         });
 

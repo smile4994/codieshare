@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import com.example.student.codieshare.R;
 
@@ -14,6 +15,7 @@ import com.example.student.codieshare.R;
  */
 
 public class Outer extends Fragment{
+    private GridView gridView;
     public static Outer newInstance(){
         return new Outer();
     }
@@ -28,6 +30,8 @@ public class Outer extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fv = inflater.inflate(R.layout.outer, container, false);
+
+        gridView = fv.findViewById(R.id.gridview_outer);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }
