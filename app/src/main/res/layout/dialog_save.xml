@@ -31,4 +31,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/btn_pants"/>
 
+    <Button
+        android:id="@+id/btn_accessory"
+        android:text="악 세 사 리"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btn_shoes"/>
+
 </android.support.constraint.ConstraintLayout>

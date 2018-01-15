@@ -90,6 +90,7 @@ public class PictureActivity extends Activity {
         Button shirt = custom.findViewById(R.id.btn_shirt);
         Button pants = custom.findViewById(R.id.btn_pants);
         Button shoes = custom.findViewById(R.id.btn_shoes);
+        Button accessory = custom.findViewById(R.id.btn_accessory);
 
         outerwear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +122,14 @@ public class PictureActivity extends Activity {
                 saveImage(bm, "신발", savePictureName);
                 custom.cancel();
                 Toast.makeText(getApplicationContext(), "신발 폴터에 저장됨", Toast.LENGTH_SHORT).show();
+            }
+        });
+        accessory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveImage(bm, "악세사리", savePictureName);
+                custom.cancel();
+                Toast.makeText(getApplicationContext(), "악세사리 폴터에 저장됨", Toast.LENGTH_SHORT).show();
             }
         });
         return custom;
