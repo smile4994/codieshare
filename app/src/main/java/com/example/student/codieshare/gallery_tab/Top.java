@@ -1,21 +1,20 @@
-package com.example.student.codieshare;
+package com.example.student.codieshare.gallery_tab;
 
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import com.soundcloud.android.crop.Crop;
-
 /**
- * Created by student on 2018-01-09.
+ * Created by student on 2018-01-10.
  */
 
-public class Board extends Fragment {
+public class Top extends Fragment{
+    public static Top newInstance(){
+        return new Top();
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 }
