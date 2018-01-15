@@ -75,9 +75,9 @@ public class PictureActivity extends Activity {
             public void onClick(View v) {
                Toast.makeText(PictureActivity.this,"testMsg = "+testMsg,Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(PictureActivity.this, TestActivity.class);
-                intent.putExtra("testMsg",testMsg);
-                startActivity(intent);
+//                Intent intent = new Intent(PictureActivity.this, TestActivity.class);
+//                intent.putExtra("testMsg",testMsg);
+//                startActivity(intent);
 
             }
         });

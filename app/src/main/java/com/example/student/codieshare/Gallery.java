@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -42,6 +43,13 @@ public class Gallery extends Fragment{
 
         GridView gv = (GridView)view.findViewById(R.id.gridview);
         final ImageAdapter ia = new ImageAdapter(context);
+        gv.setAdapter(ia);
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ia.callImageViewer(position);
+            }
+        });
 
         return view;
     }
@@ -90,7 +98,7 @@ public class Gallery extends Fragment{
             ImageView imageView;
             if (convertView == null){
                 imageView = new ImageView(context);
-                imageView.setLayoutParams(new GridView.LayoutParams(95, 95));
+                imageView.setLayoutParams(new GridView.LayoutParams(450, 450));
                 imageView.setAdjustViewBounds(false);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setPadding(2, 2, 2, 2);
@@ -100,7 +108,7 @@ public class Gallery extends Fragment{
             BitmapFactory.Options bo = new BitmapFactory.Options();
             bo.inSampleSize = 8;
             Bitmap bmp = BitmapFactory.decodeFile(thumbsDataList.get(position), bo);
-            Bitmap resized = Bitmap.createScaledBitmap(bmp, 95, 95, true);
+            Bitmap resized = Bitmap.createScaledBitmap(bmp, 450, 450, true);
             imageView.setImageBitmap(resized);
 
             return imageView;
