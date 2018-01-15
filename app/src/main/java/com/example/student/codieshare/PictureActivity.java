@@ -30,8 +30,12 @@ public class PictureActivity extends Activity {
     private Button apBtnSave;
     private ImageView apImageview;
 
+    private  Button apBtnTest;
+
     private Bitmap bm;
     private String savePictureName;
+
+    private String testMsg;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,10 +44,14 @@ public class PictureActivity extends Activity {
 
         apBtnSave = findViewById(R.id.ap_btn_save);
         apImageview = findViewById(R.id.ap_imageview);
+        apBtnTest = findViewById(R.id.ap_btn_test);
 
         // fragment에서 사진 가져오는 작업
         Intent intent = new Intent(this.getIntent());
         String msg = intent.getStringExtra("pictuerUri");
+
+        testMsg = msg;
+
         Uri pictureUri = Uri.parse(msg);
         apImageview.setImageDrawable(null);
         apImageview.setImageURI(pictureUri);
@@ -59,6 +67,18 @@ public class PictureActivity extends Activity {
             @Override
             public void onClick(View v) {
                makeDialogSaveName().show();
+            }
+        });
+
+        apBtnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Toast.makeText(PictureActivity.this,"testMsg = "+testMsg,Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(PictureActivity.this, TestActivity.class);
+                intent.putExtra("testMsg",testMsg);
+                startActivity(intent);
+
             }
         });
     }
@@ -125,7 +145,6 @@ public class PictureActivity extends Activity {
         });
         return custom;
     }
-
 
     private void saveImage(Bitmap bitmap, String folder, String name) {
         String ex_storage = Environment.getExternalStorageDirectory().getAbsolutePath();

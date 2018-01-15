@@ -11,6 +11,13 @@
         android:text="저장하기"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+    <Button
+        android:id="@+id/ap_btn_test"
+        android:text="선 자르기"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/ap_btn_save"
+        />
 
     <ImageView
         android:id="@+id/ap_imageview"
@@ -19,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ap_btn_save"
+        app:layout_constraintBottom_toTopOf="@id/ap_btn_test"
         />
 
 
