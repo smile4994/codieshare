@@ -46,20 +46,6 @@ public class Gallery extends Fragment{
 
         final ImageAdapter ia = new ImageAdapter(context);
 
-//        btn_outer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                GridView gv = (GridView)v.findViewById(R.id.gridview);
-//                gv.setAdapter(ia);
-//                gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        ia.callImageViewer(position);
-//                    }
-//                });
-//            }
-//        });
-
         btn_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
