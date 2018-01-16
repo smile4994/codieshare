@@ -19,13 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".PictureActivity"/>
-<<<<<<< HEAD
-        <activity android:name=".PictureCutActivity"/>
-=======
+
         <activity android:name=".ImagePopup"/>
 
-        <!--<activity android:name=".TestActivity"/>-->
->>>>>>> bcd933f8a6846c00c39cad0a0387135b6494885a
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
