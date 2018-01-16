@@ -1,3 +1,4 @@
+
 package com.example.student.codieshare;
 
 import android.app.Activity;
@@ -29,13 +30,11 @@ import java.util.Random;
 public class PictureActivity extends Activity {
     private Button apBtnSave;
     private ImageView apImageview;
-
-    private  Button apBtnTest;
+    private Button apBtnCut;
 
     private Bitmap bm;
     private String savePictureName;
-
-    private String testMsg;
+    private String cutMsg;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,13 +43,13 @@ public class PictureActivity extends Activity {
 
         apBtnSave = findViewById(R.id.ap_btn_save);
         apImageview = findViewById(R.id.ap_imageview);
-        apBtnTest = findViewById(R.id.ap_btn_test);
+        apBtnCut = findViewById(R.id.ap_btn_cut);
 
         // fragment에서 사진 가져오는 작업
         Intent intent = new Intent(this.getIntent());
         String msg = intent.getStringExtra("pictuerUri");
 
-        testMsg = msg;
+        cutMsg = msg; //PictureCutActivity 로 보낼 메세지
 
         Uri pictureUri = Uri.parse(msg);
         apImageview.setImageDrawable(null);
@@ -66,17 +65,16 @@ public class PictureActivity extends Activity {
         apBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               makeDialogSaveName().show();
+                makeDialogSaveName().show();
             }
         });
 
-        apBtnTest.setOnClickListener(new View.OnClickListener() {
+        apBtnCut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Toast.makeText(PictureActivity.this,"testMsg = "+testMsg,Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(PictureActivity.this, TestActivity.class);
-                intent.putExtra("testMsg",testMsg);
+                Toast.makeText(PictureActivity.this, "cutMsg = " + cutMsg, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(PictureActivity.this, PictureCutActivity.class);
+                intent.putExtra("cutMsg", cutMsg);
                 startActivity(intent);
 
             }
@@ -145,9 +143,9 @@ public class PictureActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Random r = new Random();
-                String randum = r.nextInt(100)+"";
+                String randum = r.nextInt(100) + "";
                 savePictureName = "";
-                savePictureName = name.getText()+"_"+randum;
+                savePictureName = name.getText() + "_" + randum;
                 custom.cancel();
                 makeDialogSave().show();
             }

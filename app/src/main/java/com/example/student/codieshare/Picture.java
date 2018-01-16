@@ -33,10 +33,8 @@ import java.io.File;
 public class Picture extends Fragment {
     private Button btnGoPicture;
 
-    ////
-    private AlertDialog mAlertDialog;
+    private AlertDialog mAlertDialog;   // 갤러리 선택 창
     private Uri mDestinationUri; // 갤러리에서 뽑아올 사진의 Uri
-    private Uri mResultUri; // 편집후 최종 Uri
 
     private static final int REQUEST_SELECT_PICTURE = 0x01; // 사진 선택
     private static final String SAMPLE_CROPPED_IMAGE_NAME = "SampleCropImage.jpeg"; //저장될 사진 이미지
@@ -57,6 +55,7 @@ public class Picture extends Fragment {
         View view = inflater.inflate(R.layout.picture, container, false);
 
         mDestinationUri = Uri.fromFile(new File(getContext().getCacheDir(), SAMPLE_CROPPED_IMAGE_NAME));
+
         btnGoPicture = view.findViewById(R.id.btn_edit_picture);
         btnGoPicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +82,6 @@ public class Picture extends Fragment {
             requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, getString(R.string.permission_read_storage_rationale),
                     REQUEST_STORAGE_READ_ACCESS_PERMISSION);    // @see onRequestPermissionsResult()
         } else {
-            Toast.makeText(getContext(),"갤러리 클림됨",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -95,22 +93,17 @@ public class Picture extends Fragment {
     // 사진 선택 눌렀을때 발생하는 메소드
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("yyj",requestCode+"/"+resultCode);
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == REQUEST_SELECT_PICTURE) {
+            if (requestCode == REQUEST_SELECT_PICTURE) { //갤러리에서 사진선택
                 final Uri selectedUri = data.getData();
                 if (selectedUri != null) {
-                    Toast.makeText(getContext(),"111111111",Toast.LENGTH_SHORT).show();
                     startCropActivity(data.getData()); // 마지막 사진선택시 출력
                 } else {
                     Toast.makeText(getContext(), R.string.toast_cannot_retrieve_selected_image, Toast.LENGTH_SHORT).show();
                 }
-            } else if (requestCode == UCrop.REQUEST_CROP) {
-                Toast.makeText(getContext(),"request_crop:",Toast.LENGTH_SHORT).show();
-//                handleCropResult(data);
+            } else if (requestCode == UCrop.REQUEST_CROP) { // 사진편집후 완료 누름
                 handleCrop(resultCode,data);
             }
-            Toast.makeText(getContext(),"else if 벗어남 request_crop / "+requestCode,Toast.LENGTH_SHORT).show();
         }
         if (resultCode == UCrop.RESULT_ERROR) {
             handleCropError(data);
@@ -126,26 +119,13 @@ public class Picture extends Fragment {
         uCrop.start(getActivity());
     }
 
-    // 이미지 Uri 받아와서 ImageView에 set해준다
-//    private void handleCropResult(@NonNull Intent result) {
-//        Toast.makeText(getContext(),"2222222222222222",Toast.LENGTH_SHORT).show();
-//        mResultUri = UCrop.getOutput(result);
-//        if (mResultUri != null) {
-//            // ResultActivity.startWithUri(MainActivity.this, resultUri);
-//            Toast.makeText(getContext(),"3333333333333333333",Toast.LENGTH_SHORT).show();
-//            Toast.makeText(getContext(), mResultUri.toString(), Toast.LENGTH_SHORT).show();
-////            mImageView.setImageURI(mResultUri);
-//        } else {
-//            Toast.makeText(getContext(), R.string.toast_cannot_retrieve_cropped_image, Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    // 이미지 Uri 받아와서 PictureActivity에 intent
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == Activity.RESULT_OK) {
             Intent intent = new Intent(getActivity(), PictureActivity.class);
             String pictuerUri = UCrop.getOutput(result).toString();
             intent.putExtra("pictuerUri",pictuerUri);
             startActivity(intent);
-        } else if (resultCode == Crop.RESULT_ERROR) {
         }
     }
 
@@ -218,8 +198,7 @@ public class Picture extends Fragment {
         return uCrop.withOptions(options);
     }
 
-///////////////////////////////////////
-
+//갤러리 파일 끌어오는 메소드 실행시 동작//
     protected void requestPermission(final String permission, String rationale, final int requestCode) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
             showAlertDialog(getString(R.string.permission_title_rationale), rationale,
