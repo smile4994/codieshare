@@ -72,18 +72,13 @@ public class PictureActivity extends Activity {
         apBtnCut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
+
                 Toast.makeText(PictureActivity.this, "cutMsg = " + cutMsg, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(PictureActivity.this, PictureCutActivity.class);
                 intent.putExtra("cutMsg", cutMsg);
                 startActivity(intent);
-=======
-               Toast.makeText(PictureActivity.this,"testMsg = "+testMsg,Toast.LENGTH_SHORT).show();
 
-//                Intent intent = new Intent(PictureActivity.this, TestActivity.class);
-//                intent.putExtra("testMsg",testMsg);
-//                startActivity(intent);
->>>>>>> bcd933f8a6846c00c39cad0a0387135b6494885a
+
 
             }
         });
