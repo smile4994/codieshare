@@ -17,6 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,8 +42,33 @@ public class Gallery extends Fragment{
         btn_shoes = view.findViewById(R.id.btn_shoes);
         btn_acc = view.findViewById(R.id.btn_acc);
 
-        GridView gv = (GridView)view.findViewById(R.id.gridview);
+
+
         final ImageAdapter ia = new ImageAdapter(context);
+
+//        btn_outer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                GridView gv = (GridView)v.findViewById(R.id.gridview);
+//                gv.setAdapter(ia);
+//                gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        ia.callImageViewer(position);
+//                    }
+//                });
+//            }
+//        });
+
+        btn_top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "티셔츠", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        GridView gv = (GridView)view.findViewById(R.id.gridview);
         gv.setAdapter(ia);
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
