@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PictureActivity"/>
-
+        <activity android:name=".PictureCutActivity"/>
         <activity android:name=".ImagePopup"/>
 
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
