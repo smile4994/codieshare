@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == UCrop.REQUEST_CROP) {     // Picture 에서 받은 request코드를 강제로 다시 인텐트시킨다
-            Log.d("yyj2", requestCode + "/" + resultCode);
+            Log.d("jys", requestCode + "/" + resultCode);
             frags[0].onActivityResult(requestCode, resultCode, data);
         }
     }
