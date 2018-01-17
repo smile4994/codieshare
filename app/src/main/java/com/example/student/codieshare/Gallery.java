@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -19,13 +20,15 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 /**
  * Created by student on 2018-01-09.
  */
 
-public class Gallery extends Fragment{
+public class Gallery extends Fragment {
     private Context context;
     private Button btn_outer, btn_top, btn_bottom, btn_shoes, btn_acc;
 
@@ -43,7 +46,6 @@ public class Gallery extends Fragment{
         btn_acc = view.findViewById(R.id.btn_acc);
 
 
-
         final ImageAdapter ia = new ImageAdapter(context);
 
         btn_top.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +56,7 @@ public class Gallery extends Fragment{
         });
 
 
-        GridView gv = (GridView)view.findViewById(R.id.gridview);
+        GridView gv = (GridView) view.findViewById(R.id.gridview);
         gv.setAdapter(ia);
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -67,30 +69,32 @@ public class Gallery extends Fragment{
     }
 
 
-    /**==========================================
-     *              Adapter class
-     * ==========================================*/
+    /**
+     * ==========================================
+     * Adapter class
+     * ==========================================
+     */
     public class ImageAdapter extends BaseAdapter {
         private String imgData;
         private String geoData;
         private ArrayList<String> thumbsDataList;
         private ArrayList<String> thumbsIDList;
 
-        ImageAdapter(Context c){
+        public ImageAdapter(Context c) {
             context = c;
             thumbsDataList = new ArrayList<String>();
             thumbsIDList = new ArrayList<String>();
             getThumbInfo(thumbsIDList, thumbsDataList);
         }
 
-        public final void callImageViewer(int selectedIndex){
+        public final void callImageViewer(int selectedIndex) {
             Intent i = new Intent(context, ImagePopup.class);
             String imgPath = getImageInfo(imgData, geoData, thumbsIDList.get(selectedIndex));
             i.putExtra("filename", imgPath);
             startActivityForResult(i, 1);
         }
 
-        public boolean deleteSelected(int sIndex){
+        public boolean deleteSelected(int sIndex) {
             return true;
         }
 
@@ -108,25 +112,25 @@ public class Gallery extends Fragment{
 
         public View getView(int position, View convertView, ViewGroup parent) {
             ImageView imageView;
-            if (convertView == null){
+            if (convertView == null) {
                 imageView = new ImageView(context);
                 imageView.setLayoutParams(new GridView.LayoutParams(450, 450));
                 imageView.setAdjustViewBounds(false);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setPadding(2, 2, 2, 2);
-            }else{
+            } else {
                 imageView = (ImageView) convertView;
             }
-            BitmapFactory.Options bo = new BitmapFactory.Options();
-            bo.inSampleSize = 8;
-            Bitmap bmp = BitmapFactory.decodeFile(thumbsDataList.get(position), bo);
-            Bitmap resized = Bitmap.createScaledBitmap(bmp, 450, 450, true);
-            imageView.setImageBitmap(resized);
+
+            // 리스트뷰에 웹 이미지 띄울때 많이 사용하는 라이브러리
+            // Glide.with(context).load(이미지URL).into(이미지뷰)
+            Glide.with(context).load(thumbsDataList.get(position)).into(imageView);
+
 
             return imageView;
         }
 
-        private void getThumbInfo(ArrayList<String> thumbsIDs, ArrayList<String> thumbsDatas){
+        private void getThumbInfo(ArrayList<String> thumbsIDs, ArrayList<String> thumbsDatas) {
             String[] proj = {MediaStore.Images.Media._ID,
                     MediaStore.Images.Media.DATA,
                     MediaStore.Images.Media.DISPLAY_NAME,
@@ -135,10 +139,9 @@ public class Gallery extends Fragment{
             Cursor imageCursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                     proj, null, null, null);
 
-            if (imageCursor != null && imageCursor.moveToFirst()){
+            if (imageCursor != null && imageCursor.moveToFirst()) {
                 String title;
                 String thumbsID;
-
                 String thumbsImageID;
                 String thumbsData;
                 String data;
@@ -155,27 +158,27 @@ public class Gallery extends Fragment{
                     thumbsImageID = imageCursor.getString(thumbsImageIDCol);
                     imgSize = imageCursor.getString(thumbsSizeCol);
                     num++;
-                    if (thumbsImageID != null){
+                    if (thumbsImageID != null) {
                         thumbsIDs.add(thumbsID);
                         thumbsDatas.add(thumbsData);
                     }
-                }while (imageCursor.moveToNext());
+                } while (imageCursor.moveToNext());
             }
             imageCursor.close();
             return;
         }
 
-        private String getImageInfo(String ImageData, String Location, String thumbID){
+        private String getImageInfo(String ImageData, String Location, String thumbID) {
             String imageDataPath = null;
             String[] proj = {MediaStore.Images.Media._ID,
                     MediaStore.Images.Media.DATA,
                     MediaStore.Images.Media.DISPLAY_NAME,
                     MediaStore.Images.Media.SIZE};
             Cursor imageCursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    proj, "_ID='"+ thumbID +"'", null, null);
+                    proj, "_ID='" + thumbID + "'", null, null);
 
-            if (imageCursor != null && imageCursor.moveToFirst()){
-                if (imageCursor.getCount() > 0){
+            if (imageCursor != null && imageCursor.moveToFirst()) {
+                if (imageCursor.getCount() > 0) {
                     int imgData = imageCursor.getColumnIndex(MediaStore.Images.Media.DATA);
                     imageDataPath = imageCursor.getString(imgData);
                 }
@@ -184,6 +187,5 @@ public class Gallery extends Fragment{
             return imageDataPath;
         }
     }
-
 
 }
