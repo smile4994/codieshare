@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +36,8 @@ import java.util.ArrayList;
 public class Gallery extends Fragment {
     private Context context;
     private Button btn_outer, btn_top, btn_bottom, btn_shoes, btn_acc;
-
+    public int num;
+    private GridView gv;
 
     @Nullable
     @Override
@@ -44,20 +50,57 @@ public class Gallery extends Fragment {
         btn_bottom = view.findViewById(R.id.btn_bottom);
         btn_shoes = view.findViewById(R.id.btn_shoes);
         btn_acc = view.findViewById(R.id.btn_acc);
+        gv = (GridView) view.findViewById(R.id.gridview);
 
 
         final ImageAdapter ia = new ImageAdapter(context);
 
-        btn_top.setOnClickListener(new View.OnClickListener() {
+        btn_outer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "티셔츠", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "outer", Toast.LENGTH_SHORT).show();
+                ia.setNum(1);
+                gv.setAdapter(ia);
+
             }
         });
 
+        btn_top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ia.setNum(2);
+                gv.setAdapter(ia);
 
-        GridView gv = (GridView) view.findViewById(R.id.gridview);
-        gv.setAdapter(ia);
+            }
+        });
+
+        btn_bottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ia.setNum(3);
+                gv.setAdapter(ia);
+
+            }
+        });
+
+        btn_shoes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ia.setNum(4);
+                gv.setAdapter(ia);
+
+            }
+        });
+
+        btn_acc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ia.setNum(5);
+                gv.setAdapter(ia);
+
+            }
+        });
+
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -79,6 +122,12 @@ public class Gallery extends Fragment {
         private String geoData;
         private ArrayList<String> thumbsDataList;
         private ArrayList<String> thumbsIDList;
+        private int num;
+        private Cursor imageCursor;
+
+        public void setNum(int num) {
+            this.num = num;
+        }
 
         public ImageAdapter(Context c) {
             context = c;
@@ -136,9 +185,49 @@ public class Gallery extends Fragment {
                     MediaStore.Images.Media.DISPLAY_NAME,
                     MediaStore.Images.Media.SIZE};
 
-            Cursor imageCursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    proj, null, null, null);
 
+            Log.i("gaaaaaanum", ""+num);
+            switch (num) {
+//            Cursor imageCursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                    proj, , null, null);
+                case 1:
+                 imageCursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        proj, "bucket_DISPLAY_NAME='아우터'", null, null);
+                 Log.i("gaaaaaa", "1");
+                break;
+
+
+                case 2:
+                    imageCursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                            proj, "bucket_DISPLAY_NAME='상의'", null, null);
+                    Log.i("gaaaaaa", "2");
+                    break;
+
+                case 3:
+                    imageCursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                            proj, "bucket_DISPLAY_NAME='하의'", null, null);
+                    Log.i("gaaaaaa", "3");
+                    break;
+
+                case 4:
+                    imageCursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                            proj, "bucket_DISPLAY_NAME='신발'", null, null);
+                    Log.i("gaaaaaa", "4");
+                    break;
+
+                case 5:
+                    imageCursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                            proj, "bucket_DISPLAY_NAME='악세사리'", null, null);
+                    Log.i("gaaaaaa", "5");
+                    break;
+
+
+                default:
+                    imageCursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                            proj, null, null, null);
+                    Log.i("gaaaaaa", "6");
+                    break;
+            }
             if (imageCursor != null && imageCursor.moveToFirst()) {
                 String title;
                 String thumbsID;
